@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import MoviesViewSet
+from .views import MoviesViewSet,UserApiView
 urlpatterns = [
     path('movies', MoviesViewSet.as_view({
         'get': 'list',
@@ -9,4 +9,6 @@ urlpatterns = [
         'get': 'retrieve',
         'put': 'update',
         'delete': 'destroy'
-    })),]
+    })),
+    path('user',UserApiView.as_view())
+    ]
