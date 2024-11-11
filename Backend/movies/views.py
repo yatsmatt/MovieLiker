@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets,status
-from .models import Movies
+from .models import Movies,User
 from .serializers import MoviesSerializers
 from rest_framework.response import Response
+from rest_framework.views import APIView 
+import random
 
 class MoviesViewSet(viewsets.ViewSet):
     def list(self,req):
@@ -32,3 +34,12 @@ class MoviesViewSet(viewsets.ViewSet):
         movie= Movies.objects.get(id=pk)
         movie.delete()
         return Response(status=status.HTTP_202_ACCEPTED)
+    
+
+class UserApiView(APIView):
+    def get(self, _):
+        users = User.objects.all()
+        user = random.choice(users)
+        return Response({
+            'id': user.id
+        })
